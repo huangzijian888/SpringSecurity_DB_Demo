@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//BN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huangzijian888.securitydb.mapper.UserMapper">
+    <select id="loadUserByUsername" resultType="cn.huangzijian888.securitydb.bean.User">
+        select *
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="getUserRolesById" resultType="cn.huangzijian888.securitydb.bean.Role">
+        select *
+        from role
+        where id in (select rid
+                     from user_role
+                     where uid = #{id})
+    </select>
+
+</mapper>
